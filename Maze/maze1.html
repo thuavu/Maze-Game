@@ -1,0 +1,437 @@
+<html>
+<link rel="icon" href="https://cdn3.iconfinder.com/data/icons/abstract-maze/72/Abstract_maze_symbols-15-512.png">
+<head>
+  <style>
+    body{
+      background-image: url(https://www.wallpaperup.com/uploads/wallpapers/2015/03/27/647550/5c6f5eae95ff3daa6d257f4701df5aa2-700.jpg);
+      background-attachment:fixed;
+      height: 79%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+
+      font: 15px/25px Letter Gothic Std, sans-serif;
+      font-stretch: ultra-expanded;
+      letter-spacing: 4px;
+      font-weight:900;
+      /*line-height:50px;*/
+    }
+    h1.a{
+      float: left;
+    }
+    h2.b{
+      float: right;
+      color: white;
+    }
+    div.head{
+      clear: both;
+    }
+    div.transbox {
+      margin: 30px;
+      width: 42%;
+      height: 103%;
+      padding: 25px;
+      background-color: #ffffff;
+      border: 1px solid;
+      opacity: 0.7;
+      filter: alpha(opacity=80); /* For IE8 and earlier */
+      resize: both;
+      overflow: auto;
+      margin-bottom: 2%;
+      margin-left: 4%;
+    }
+    div.wall{        /*Have to change coordinates of the goal at Line 390.-->(left and Top)*/
+      position: absolute;
+      background-color: green;
+      width: 14px;
+      height: 14px;
+      right: 10px;
+      /*Below are the cooridinates*/
+      left: 820px;
+      top: 480px;
+    }
+    #box {
+      position: absolute;
+      border: 2px solid black;
+      width:10;
+      height: 10;
+      left: 470;
+      top: 110;
+      background-color: black;
+      transition: 100ms;
+    }
+
+    #wallOne {
+      position: absolute;
+      width: 6;
+      height:400;
+      left: 450;
+      top: 106;
+      background-color: black;
+    }
+    /*WallOne is the far left wall*/
+    #wallTwo {
+      position: absolute;
+      width: 6;
+      height:400;
+      left: 850;
+      top: 100;
+      background-color: black;
+    }
+    /*WallTwo is the far right wall*/
+    #wallThree {
+      position: absolute;
+      width: 350;
+      height:6;
+      left: 500;
+      top: 100;
+      background-color: black;
+    }
+    /*WallThree is the top wall*/
+    #wallFour {
+      position: absolute;
+      width: 350;
+      height:6;
+      left: 450;
+      top: 500;
+      background-color: black;
+    }
+    /*WallFour is the bottom wall*/
+    #wallFive {
+      position: absolute;
+      width: 6;
+      height:300;
+      left: 500;
+      top: 150;
+      background-color: black;
+    }
+    /*WallFive is the second vertical line from the left*/
+    #wallSix {
+      position: absolute;
+      width: 6;
+      height:200;
+      left: 550;
+      top: 200;
+      background-color: black;
+    }
+    /*WallSix is the third vertical line from the left*/
+    #wallSeven {
+      position: absolute;
+      width: 6;
+      height:250;
+      left: 600;
+      top: 200;
+      background-color: black;
+    }
+    /*WallSeven is the fourth vertical line from the left*/
+    #wallEight {
+      position: absolute;
+      width: 6;
+      height:200;
+      left: 650;
+      top: 150;
+      background-color: black;
+    }
+    /*WallEight is the fifth vertical line from the left*/
+    #wallNine {
+      position: absolute;
+      width: 6;
+      height:150;
+      left: 700;
+      top: 200;
+      background-color: black;
+    }
+    /*WallNine is the sixth vertical line from the left*/
+    #wallTen {
+      position: absolute;
+      width: 6;
+      height:200;
+      left: 750;
+      top: 200;
+      background-color: black;
+    }
+    /*WallTen is the seventh vertical line from the left*/
+    #wallEleven {
+      position: absolute;
+      width: 6;
+      height:300;
+      left: 800;
+      top: 150;
+      background-color: black;
+    }
+    /*WallEleven is the eigth vertical line from the left*/
+    #wallTwelve {
+      position: absolute;
+      width: 6;
+      height:50;
+      left: 750;
+      top: 450;
+      background-color: black;
+    }
+    /*WallTwelve is the really small vertical line on the last row*/
+    #wallThirteen {
+      position: absolute;
+      width: 200;
+      height:6;
+      left: 550;
+      top: 150;
+      background-color: black;
+    }
+    /*WallThirteen is the second line from the top*/
+    #wallFourteen {
+      position: absolute;
+      width: 50;
+      height:6;
+      left: 550;
+      top: 200;
+      background-color: black;
+    }
+    /*WallFourteen is small line on the left side of the third row from the top*/
+    #wallFifteen {
+      position: absolute;
+      width: 100;
+      height:6;
+      left: 650;
+      top: 200;
+      background-color: black;
+    }
+    /*WallFifteen is small line on the right side of the third row from the top*/
+    #wallSixteen {
+      position: absolute;
+      width: 100;
+      height:6;
+      left: 600;
+      top: 400;
+      background-color: black;
+    }
+    /*WallSixteen is the third line from the bottom*/
+    #wallSeventeen {
+      position: absolute;
+      width: 306;
+      height:6;
+      left: 500;
+      top: 450;
+      background-color: black;
+    }
+    /*WallSeventeen is the second line from the top*/
+    #wallEighteen {
+      position: absolute;
+      width: 6;
+      height:56;
+      left: 750;
+      top: 100;
+      background-color: black;
+    }
+    /*WallEighteen is the really small vertical line in the first row*/
+  </style>
+</head>
+<title>Level 1</title>
+<body>
+
+  <!---->
+    <!--<iframe style="opacity: 0.1; float: left;" width="20" height="10" src="http://www.youtube.com/embed/nEgKXtA8SZY?rel=0&autoplay=1&loop=1" frameborder="0" allowfullscreen></iframe>-->
+    <!--<iframe src="https://embed.spotify.com/?uri=spotify:user:fairyrave:playlist:0NCspsyf0OS4BsPgGhkQXM" style="opacity: 0.5; float: left;" width="20" height="10" frameborder="0" allowtransparency="true"></iframe>-->
+  <audio style="opacity: 0.0; float: left;  width: 20px; height: 10px;" controls autoplay loop>
+    <source src="https://dl24.y2mate.com/youtube/mp3/7/y2mate.com%20-%20the_lord_of_the_rings_the_fellowship_of_the_ring_cr_14_the_nazgul_0W2D8EGnYb0.mp3" type="audio/mpeg">
+  </audio>
+
+  <center>
+  <!--Where the maze is generated.-->
+    <div class="transbox">
+      <div id="box"></div>
+      <div id="wallOne"></div>
+      <div id="wallTwo"></div>
+      <div id="wallThree"></div>
+      <div id="wallFour"></div>
+      <div id="wallFive"></div>
+      <div id="wallSix"></div>
+      <div id="wallSeven"></div>
+      <div id="wallEight"></div>
+      <div id="wallNine"></div>
+      <div id="wallTen"></div>
+      <div id="wallEleven"></div>
+      <div id="wallTwelve"></div>
+      <div id="wallThirteen"></div>
+      <div id="wallFourteen"></div>
+      <div id="wallFifteen"></div>
+      <div id="wallSixteen"></div>
+      <div id="wallSeventeen"></div>
+      <div id="wallEighteen"></div>
+      <form action="/Maze2" method="get">
+        <div class="wall" ></div>
+      </form>
+    </div>
+  </center>
+
+<script>
+
+  let boxHeight = 10;
+  let boxWidth = 10;
+  let boxTop = 20;
+  let boxLeft = 10;
+
+  let wallOneHeight = 400;
+  let wallOneWidth = 6;
+  let wallOneTop = 106;
+  let wallOneLeft = 450;
+
+  let wallTwoHeight = 400;
+  let wallTwoWidth = 6;
+  let wallTwoTop = 100;
+  let wallTwoLeft = 850;
+
+  let wallThreeHeight = 6;
+  let wallThreeWidth = 350;
+  let wallThreeTop = 100;
+  let wallThreeLeft = 500;
+
+  let wallFourHeight = 6;
+  let wallFourWidth = 350;
+  let wallFourTop = 500;
+  let wallFourLeft = 450;
+
+  let wallFiveHeight = 300;
+  let wallFiveWidth = 6;
+  let wallFiveTop = 150;
+  let wallFiveLeft = 500;
+
+  let wallSixHeight = 200;
+  let wallSixWidth = 6;
+  let wallSixTop = 200;
+  let wallSixLeft = 550;
+
+  let wallSevenHeight = 200;
+  let wallSevenWidth = 6;
+  let wallSevenTop = 200;
+  let wallSevenLeft = 600;
+
+  let wallEightHeight = 200;
+  let wallEightWidth = 6;
+  let wallEightTop = 150;
+  let wallEightLeft = 650;
+
+  let wallNineHeight = 150;
+  let wallNineWidth = 6;
+  let wallNineTop = 200;
+  let wallNineLeft = 700;
+
+  let wallTenHeight = 200;
+  let wallTenWidth = 6;
+  let wallTenTop = 200;
+  let wallTenLeft = 750;
+
+  let wallElevenHeight = 300;
+  let wallElevenWidth = 6;
+  let wallElevenTop = 150;
+  let wallElevenLeft = 800;
+
+  let wallTwelveHeight = 50;
+  let wallTwelveWidth = 6;
+  let wallTwelveTop = 450;
+  let wallTwelveLeft = 750;
+
+  let wallThirteenHeight = 6;
+  let wallThirteenWidth = 200;
+  let wallThirteenTop = 150;
+  let wallThirteenLeft = 550;
+
+  let wallFourteenHeight = 6;
+  let wallFourteenWidth = 50;
+  let wallFourteenTop = 200;
+  let wallFourteenLeft = 550;
+
+  let wallFifteenHeight = 6;
+  let wallFifteenWidth = 100;
+  let wallFifteenTop = 200;
+  let wallFifteenLeft = 650;
+
+  let wallSixteenHeight = 6;
+  let wallSixteenWidth = 100;
+  let wallSixteenTop = 400;
+  let wallSixteenLeft = 600;
+
+  let wallSeventeenHeight = 6;
+  let wallSeventeenWidth = 300;
+  let wallSeventeenTop = 450;
+  let wallSeventeenLeft = 500;
+
+  let wallEighteenHeight = 50;
+  let wallEighteenWidth = 6;
+  let wallEighteenTop = 100;
+  let wallEighteenLeft = 750;
+
+  function Collision(a) {
+    console.log(a.style.top, a.style.left);
+    if (((boxTop <= (wallOneTop + wallOneHeight)) && ((boxTop + boxHeight) >= wallOneTop) && ((boxLeft + boxWidth) >= wallOneLeft) && (boxLeft <= (wallOneLeft + wallOneWidth))) ||
+        ((boxTop <= (wallTwoTop + wallTwoHeight)) && ((boxTop + boxHeight) >= wallTwoTop) && ((boxLeft + boxWidth) >= wallTwoLeft) && (boxLeft <= (wallTwoLeft + wallTwoWidth))) ||
+        ((boxTop <= (wallThreeTop + wallThreeHeight)) && ((boxTop + boxHeight) >= wallThreeTop) && ((boxLeft + boxWidth) >= wallThreeLeft) && (boxLeft <= (wallThreeLeft + wallThreeWidth))) ||
+        ((boxTop <= (wallFourTop + wallFourHeight)) && ((boxTop + boxHeight) >= wallFourTop) && ((boxLeft + boxWidth) >= wallFourLeft) && (boxLeft <= (wallFourLeft + wallFourWidth))) ||
+        ((boxTop <= (wallFiveTop + wallFiveHeight)) && ((boxTop + boxHeight) >= wallFiveTop) && ((boxLeft + boxWidth) >= wallFiveLeft) && (boxLeft <= (wallFiveLeft + wallFiveWidth))) ||
+        ((boxTop <= (wallSixTop + wallSixHeight)) && ((boxTop + boxHeight) >= wallSixTop) && ((boxLeft + boxWidth) >= wallSixLeft) && (boxLeft <= (wallSixLeft + wallSixWidth))) ||
+        ((boxTop <= (wallSevenTop + wallSevenHeight)) && ((boxTop + boxHeight) >= wallSevenTop) && ((boxLeft + boxWidth) >= wallSevenLeft) && (boxLeft <= (wallSevenLeft + wallSevenWidth))) ||
+        ((boxTop <= (wallEightTop + wallEightHeight)) && ((boxTop + boxHeight) >= wallEightTop) && ((boxLeft + boxWidth) >= wallEightLeft) && (boxLeft <= (wallEightLeft + wallEightWidth))) ||
+        ((boxTop <= (wallNineTop + wallNineHeight)) && ((boxTop + boxHeight) >= wallNineTop) && ((boxLeft + boxWidth) >= wallNineLeft) && (boxLeft <= (wallNineLeft + wallNineWidth))) ||
+        ((boxTop <= (wallTenTop + wallTenHeight)) && ((boxTop + boxHeight) >= wallTenTop) && ((boxLeft + boxWidth) >= wallTenLeft) && (boxLeft <= (wallTenLeft + wallTenWidth))) ||
+        ((boxTop <= (wallElevenTop + wallElevenHeight)) && ((boxTop + boxHeight) >= wallElevenTop) && ((boxLeft + boxWidth) >= wallElevenLeft) && (boxLeft <= (wallElevenLeft + wallElevenWidth))) ||
+        ((boxTop <= (wallTwelveTop + wallTwelveHeight)) && ((boxTop + boxHeight) >= wallTwelveTop) && ((boxLeft + boxWidth) >= wallTwelveLeft) && (boxLeft <= (wallTwelveLeft + wallTwelveWidth))) ||
+        ((boxTop <= (wallThirteenTop + wallThirteenHeight)) && ((boxTop + boxHeight) >= wallThirteenTop) && ((boxLeft + boxWidth) >= wallThirteenLeft) && (boxLeft <= (wallThirteenLeft + wallThirteenWidth))) ||
+        ((boxTop <= (wallFourteenTop + wallFourteenHeight)) && ((boxTop + boxHeight) >= wallFourteenTop) && ((boxLeft + boxWidth) >= wallFourteenLeft) && (boxLeft <= (wallFourteenLeft + wallFourteenWidth))) ||
+        ((boxTop <= (wallFifteenTop + wallFifteenHeight)) && ((boxTop + boxHeight) >= wallFifteenTop) && ((boxLeft + boxWidth) >= wallFifteenLeft) && (boxLeft <= (wallFifteenLeft + wallFifteenWidth))) ||
+        ((boxTop <= (wallSixteenTop + wallSixteenHeight)) && ((boxTop + boxHeight) >= wallSixteenTop) && ((boxLeft + boxWidth) >= wallSixteenLeft) && (boxLeft <= (wallSixteenLeft + wallSixteenWidth))) ||
+        ((boxTop <= (wallSeventeenTop + wallSeventeenHeight)) && ((boxTop + boxHeight) >= wallSeventeenTop) && ((boxLeft + boxWidth) >= wallSeventeenLeft) && (boxLeft <= (wallSeventeenLeft + wallSeventeenWidth))) ||
+        ((boxTop <= (wallEighteenTop + wallEighteenHeight)) && ((boxTop + boxHeight) >= wallEighteenTop) && ((boxLeft + boxWidth) >= wallEighteenLeft) && (boxLeft <= (wallEighteenLeft + wallEighteenWidth)))
+
+    ){
+      console.log("Stop!!");
+      location.reload();
+    }
+  }
+
+  function goal(shiftLeft,shiftTop) {
+    if ( shiftLeft == ( 820 || 820 + 10 || 820 - 10) && shiftTop == ( 480 || 480 + 10 || 890 - 10) ) {
+      window.location.href = "/Maze2";
+    }
+  }
+
+  let shiftLeft = 470;
+  let shiftTop = 110;
+
+  document.addEventListener('keydown', (event)=> {
+    if( shiftLeft>450 && shiftLeft<850 && shiftTop>100 && shiftTop<500 )
+    {
+      if(event.key === 'ArrowDown')
+      {
+        shiftTop = shiftTop + 5;
+        Collision(box);
+        goal(shiftLeft,shiftTop);
+      }
+      else if(event.key === 'ArrowLeft')
+      {
+        shiftLeft = shiftLeft - 5;
+        Collision(box);
+        goal(shiftLeft,shiftTop);
+      }
+      else if (event.key === 'ArrowUp')
+      {
+        shiftTop = shiftTop - 5;
+        Collision(box);
+        goal(shiftLeft,shiftTop);
+      }
+      else if(event.key === 'ArrowRight')
+      {
+        shiftLeft = shiftLeft + 5;
+        Collision(box);
+        goal(shiftLeft,shiftTop);
+      }
+      box.style.left = shiftLeft + 'px';
+      box.style.top = shiftTop + 'px';
+      boxTop = shiftTop;
+      boxLeft = shiftLeft;
+    }
+    else {
+      location.reload();
+    }
+  });
+</script>
+</body>
+</html>

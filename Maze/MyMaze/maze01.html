@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="icon" href="https://cdn3.iconfinder.com/data/icons/abstract-maze/72/Abstract_maze_symbols-15-512.png">
+  <style>
+    body{
+      background-image: url(https://www.wallpaperup.com/uploads/wallpapers/2015/03/27/647550/5c6f5eae95ff3daa6d257f4701df5aa2-700.jpg);
+      background-attachment:fixed;
+      height: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+
+      font: 15px/25px Letter Gothic Std, sans-serif;
+      font-stretch: ultra-expanded;
+      letter-spacing: 4px;
+      font-weight:900;
+      /*line-height:50px;*/
+    }
+    canvas {
+      border: 1px solid #d3d3d3;
+      background-color: #f1f1f1;
+      width: 480px;
+      height: 480px;
+
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 40%;
+    }
+    h1.a{
+      float: left;
+    }
+    h2.b{
+      float: right;
+      color: white;
+    }
+    div.head{
+      clear: both;
+    }
+    div.transbox {
+      margin: 30px;
+      width: 55%;
+      height: auto;
+      padding: 25px;
+      background-color: #ffffff;
+      border: 1px solid;
+      opacity: 0.8;
+      filter: alpha(opacity=80); /* For IE8 and earlier */
+      resize: both;
+      overflow: auto;
+    }
+    #box{
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      border: 2px solid black;
+      left: 450px;
+      top: 125px;
+    }
+    div.wall{        /*Have to change coordinates of the goal.-->(left and Top)Line 218*/
+      position: absolute;
+      background-color: green;
+      width: 15px;
+      height: 15px;
+      left: 10px;
+      right: 10px;
+      border: 2px solid green;
+      left: 420px;
+      top: 225px;
+    }
+    .button {
+        /*background-color: #4CAF50;*/ /* Green */
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+        cursor: pointer;
+        width: 250px;
+
+        font: 15px/25px Letter Gothic Std, sans-serif;
+        font-stretch: ultra-expanded;
+        letter-spacing: 4px;
+        font-weight:900;
+        line-height:50px;
+    }
+    .button1 {
+        color: black;
+        border: 2px solid #4CAF50;
+
+        background-color: #ffffff;
+        border: 1px solid;
+        opacity: 0.8;
+    }
+    .button1:hover {
+        background-color: black;
+        color: white;
+    }
+    .button0 {
+    		background-color: #4CAF50; /* Green */
+    		padding: 5px 8px;
+    		text-align: center;
+    		text-decoration: none;
+    		display: inline-block;
+    		font-size: 7px;
+    		margin: 4px 2px;
+    		-webkit-transition-duration: 0.4s; /* Safari */
+    		transition-duration: 0.4s;
+    		cursor: pointer;
+    		width: 180px;
+
+    		font: 15px/25px Letter Gothic Std, sans-serif;
+    		font-stretch: ultra-expanded;
+    		letter-spacing: 4px;
+    		font-weight:800;
+    		line-height:40px;
+        white-space: nowrap;
+    }
+    .button01 {
+    		color: black;
+    		border: 2px solid #4CAF50;
+
+    		background-color: #ffffff;
+    		border: 1px solid;
+    		opacity: 0.8;
+    }
+    .button01:hover {
+    		background-color: black;
+    		color: white;
+    }
+    .button01:visited {
+    		color: gray;
+    }
+    .button011:link{
+    		color: gray;
+    }
+  </style>
+</head>
+<title>Maze Level 1</title>
+<body onload="startGame()">
+
+    <div class="head">
+      <h1 class="a">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Maze</h1>
+      <h2 class="b">Level 1
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2>
+      <div id="box"></div>
+      <form action="/Maze2" method="get">
+        <div class="wall" ></div>
+      </form>
+    </div>
+    <br><br>
+
+<script>
+  //Loads game.
+  function startGame() {
+    myGameArea.start();
+    movebox();
+  }
+
+  //Loads canvas.
+  var myGameArea = {
+    canvas : document.createElement("canvas"),
+    start : function() {
+        this.canvas.width = 480;
+        this.canvas.height = 480;
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.childNodes[50]);
+    }
+  }
+
+  const box = document.querySelector("#box");
+
+  //Movement of the user's box.
+  function movebox() {
+    let shiftLeft = 450;
+    let shiftTop = 125;
+
+    document.addEventListener("keydown", (event) => {
+      if( shiftLeft>392 && shiftLeft<873 && shiftTop>62 && shiftTop<516 )
+      {
+        if(event.key === "ArrowDown")
+        {
+          shiftTop = shiftTop + 2;
+          goal(shiftLeft,shiftTop)
+        }
+        else if (event.key === "ArrowLeft")
+        {
+          shiftLeft = shiftLeft - 2;
+          goal(shiftLeft,shiftTop)
+        }
+        else if (event.key === "ArrowUp")
+        {
+          shiftTop = shiftTop - 2;
+          goal(shiftLeft,shiftTop)
+        }
+        else if (event.key === "ArrowRight")
+        {
+          shiftLeft = shiftLeft + 2;
+          goal(shiftLeft,shiftTop)
+        }
+        box.style.left = shiftLeft + "px";
+        box.style.top = shiftTop + "px";
+      }
+      else{
+        location.reload();
+      }
+    });
+  }
+
+  //Set coordinates of the goal.
+  function goal(shiftLeft,shiftTop) {
+    if ( shiftLeft == ( 420 || 420 + 5 || 420 - 5) && shiftTop == ( 225 || 225 + 5 || 225 - 5) ) {
+      window.location.href = "/Maze2";
+    }
+  }
+
+</script>
+
+</body>
+</html>
