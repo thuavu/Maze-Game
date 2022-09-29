@@ -1,0 +1,1454 @@
+<html>
+<link rel="icon" href="https://cdn3.iconfinder.com/data/icons/abstract-maze/72/Abstract_maze_symbols-15-512.png">
+<head>
+  <!--http://wpnature.com/wp-content/uploads/2016/09/sky-star-gazing-milky-way-galaxy-twilight-cosoms-beauty-awesome-wallpaper-hd-1080p.jpg-->
+  <style>
+    body{
+      background-image: url(https://wallpapercave.com/wp/CToGD7f.jpg);
+      background-attachment:fixed;
+      height: 79%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+
+      font: 15px/25px Letter Gothic Std, sans-serif;
+      font-stretch: ultra-expanded;
+      letter-spacing: 4px;
+      font-weight:900;
+      /*line-height:50px;*/
+    }
+    h1.a{
+      float: left;
+    }
+    h2.b{
+      float: right;
+      color: white;
+    }
+    div.head{
+      clear: both;
+    }
+    div.transbox {
+      margin: 30px;
+      width: 42%;
+      height: 103%;
+      padding: 25px;
+      background-color: #ffffff;
+      border: 1px solid;
+      opacity: 0.7;
+      filter: alpha(opacity=80); /* For IE8 and earlier */
+      resize: both;
+      overflow: auto;
+      margin-bottom: 2%;
+      margin-left: 4%;
+    }
+    div.wall{        /*Have to change coordinates of the goal at Line 1407.-->(left and Top)*/
+      position: absolute;
+      background-color: green;
+      width: 10px;
+      height: 10px;
+      right: 10px;
+      /*Below are the cooridinates*/
+      left: 835px;
+      top: 480px;
+    }
+    #box {
+      position: absolute;
+      width:10;
+      height: 10;
+      left: 455;
+      top: 105;
+      background-color: black;
+      transition: 100ms;
+    }
+
+    #wallOne {
+      position: absolute;
+      width: 2;
+      height:400;
+      left: 450;
+      top: 100;
+      background-color: black;
+    }
+    /*WallOne is the far left wall*/
+    #wallTwo {
+      position: absolute;
+      width: 2;
+      height:360;
+      left: 470;
+      top: 120;
+      background-color: black;
+    }
+    /*WallTwo- second column*/
+    #wallThree {
+      position: absolute;
+      width: 2;
+      height:160;
+      left: 490;
+      top: 140;
+      background-color: black;
+    }
+    /*WallThree- third column, first line*/
+    #wallFour {
+      position: absolute;
+      width: 2;
+      height:140;
+      left: 490;
+      top: 320;
+      background-color: black;
+    }
+    /*WallFour- third column, second line*/
+    #wallFive {
+      position: absolute;
+      width: 2;
+      height:20;
+      left: 510;
+      top: 160;
+      background-color: black;
+    }
+    /*WallFive- fourth column, first line*/
+    #wallSix {
+      position: absolute;
+      width: 2;
+      height:220;
+      left: 510;
+      top: 200;
+      background-color: black;
+    }
+    /*WallSix- fourth column, second line*/
+    #wallSeven {
+      position: absolute;
+      width: 2;
+      height:140;
+      left: 530;
+      top: 180;
+      background-color: black;
+    }
+    /*WallSeven- fifth column, first line*/
+    #wallEight {
+      position: absolute;
+      width: 2;
+      height:100;
+      left: 530;
+      top: 340;
+      background-color: black;
+    }
+    /*WallEight- fifth column, second line*/
+    #wallNine {
+      position: absolute;
+      width: 2;
+      height:40;
+      left: 550;
+      top: 200;
+      background-color: black;
+    }
+    /*WallNine- sixth column, first line*/
+    #wallTen {
+      position: absolute;
+      width: 2;
+      height:140;
+      left: 550;
+      top: 260;
+      background-color: black;
+    }
+    /*WallTen- sixth column, second line*/
+    #wallEleven {
+      position: absolute;
+      width: 2;
+      height:80;
+      left: 570;
+      top: 220;
+      background-color: black;
+    }
+    /*WallEleven- seventh column, first line*/
+    #wallTwelve {
+      position: absolute;
+      width: 2;
+      height:60;
+      left: 570;
+      top: 320;
+      background-color: black;
+    }
+    /*WallTwelve- seventh column, second line*/
+    #wallThirteen {
+      position: absolute;
+      width: 2;
+      height:80;
+      left: 590;
+      top: 260;
+      background-color: black;
+    }
+    /*WallThirteen- eigth column, first line*/
+    #wallFourteen {
+      position: absolute;
+      width: 2;
+      height:42;
+      left: 590;
+      top: 360;
+      background-color: black;
+    }
+    /*WallFourteen- eigth column, second line*/
+    #wallFifteen {
+      position: absolute;
+      width: 2;
+      height:120;
+      left: 610;
+      top: 280;
+      background-color: black;
+    }
+    /*WallFifteen- ninth column*/
+    #wallSixteen {
+      position: absolute;
+      width: 2;
+      height:40;
+      left: 630;
+      top: 200;
+      background-color: black;
+    }
+    /*wallSixteen- tenth column, first line*/
+    #wallSeventeen {
+      position: absolute;
+      width: 2;
+      height:120;
+      left: 630;
+      top: 300;
+      background-color: black;
+    }
+    /*wallSeventeen- tenth column, second line*/
+    #wallEighteen {
+      position: absolute;
+      width: 2;
+      height:22;
+      left: 650;
+      top: 180;
+      background-color: black;
+    }
+    /*WallEighteen- eleventh column, first line*/
+    #wallNineteen {
+      position: absolute;
+      width: 2;
+      height:42;
+      left: 650;
+      top: 220;
+      background-color: black;
+    }
+    /*WallNineteen- eleventh column, second line*/
+    #wallTwenty {
+      position: absolute;
+      width: 2;
+      height:62;
+      left: 650;
+      top: 320;
+      background-color: black;
+    }
+    /*WallTwenty- eleventh column, third line*/
+    #wallTwentyOne {
+      position: absolute;
+      width: 2;
+      height:20;
+      left: 650;
+      top: 460;
+      background-color: black;
+    }
+    /*WallTwentyOne- eleventh column, fourth line*/
+    #wallTwentyTwo {
+      position: absolute;
+      width: 2;
+      height:40;
+      left: 670;
+      top: 180;
+      background-color: black;
+    }
+    /*WallTwentyTwo- twelfth column, first line*/
+    #wallTwentyThree {
+      position: absolute;
+      width: 2;
+      height:60;
+      left: 670;
+      top: 240;
+      background-color: black;
+    }
+    /*WallTwentyThree- twelfth column, second line*/
+    #wallTwentyFour {
+      position: absolute;
+      width: 2;
+      height:20;
+      left: 670;
+      top: 340;
+      background-color: black;
+    }
+    /*WallTwentyFour- twelfth column, third line*/
+    #wallTwentyFive {
+      position: absolute;
+      width: 2;
+      height:20;
+      left: 670;
+      top: 420;
+      background-color: black;
+    }
+    /*WallTwentyFive- twelfth column, fourth line*/
+    #wallTwentySix {
+      position: absolute;
+      width: 2;
+      height:60;
+      left: 690;
+      top: 180;
+      background-color: black;
+    }
+    /*WallTwentySix- thirteenth column, first line*/
+    #wallTwentySeven {
+      position: absolute;
+      width: 2;
+      height:40;
+      left: 690;
+      top: 260;
+      background-color: black;
+    }
+    /*WallTwentySeven- thirteenth column, second line*/
+    #wallTwentyEight {
+      position: absolute;
+      width: 2;
+      height:22;
+      left: 710;
+      top: 100;
+      background-color: black;
+    }
+    /*WallTwentyEight- fourteenth column, first line*/
+    #wallTwentyNine {
+      position: absolute;
+      width: 2;
+      height:82;
+      left: 710;
+      top: 200;
+      background-color: black;
+    }
+    /*WallTwentyOne- fourteenth column, second line*/
+    #wallThirty {
+      position: absolute;
+      width: 2;
+      height:20;
+      left: 710;
+      top: 380;
+      background-color: black;
+    }
+    /*WallThirty- fourteenth column, third line*/
+    #wallThirtyOne {
+      position: absolute;
+      width: 2;
+      height:60;
+      left: 730;
+      top: 180;
+      background-color: black;
+    }
+    /*WallThirty One- fifteenth column, first line*/
+    #wallThirtyTwo {
+      position: absolute;
+      width: 2;
+      height:20;
+      left: 730;
+      top: 360;
+      background-color: black;
+    }
+    /*wallThirtyTwo- fifteenth column, second line*/
+    #wallThirtyThree {
+      position: absolute;
+      width: 2;
+      height:60;
+      left: 750;
+      top: 200;
+      background-color: black;
+    }
+    /*wallThirtyThree- sixteenth column, first line*/
+    #wallThirtyFour {
+      position: absolute;
+      width: 2;
+      height:60;
+      left: 750;
+      top: 340;
+      background-color: black;
+    }
+    /*wallThirtyFour- sixteenth column, second line*/
+    #wallThirtyFive {
+      position: absolute;
+      width: 2;
+      height:102;
+      left: 770;
+      top: 180;
+      background-color: black;
+    }
+    /*wallThirtyFive- seventeenth column, first line*/
+    #wallThirtySix {
+      position: absolute;
+      width: 2;
+      height:102;
+      left: 770;
+      top: 300;
+      background-color: black;
+    }
+    /*wallThirtySix- seventeenth column, second line*/
+    #wallThirtySeven {
+      position: absolute;
+      width: 2;
+      height:220;
+      left: 790;
+      top: 160;
+      background-color: black;
+    }
+    /*wallThirtySeven- eighteenth column, first line*/
+    #wallThirtyEight {
+      position: absolute;
+      width: 2;
+      height:42;
+      left: 790;
+      top: 400;
+      background-color: black;
+    }
+    /*wallThirtyEight- eighteenth column, second line*/
+    #wallThirtyNine {
+      position: absolute;
+      width: 2;
+      height:322;
+      left: 810;
+      top: 140;
+      background-color: black;
+    }
+    /*wallThirtyNine- nineteenth column*/
+    #wallForty {
+      position: absolute;
+      width: 2;
+      height:40;
+      left: 830;
+      top: 120;
+      background-color: black;
+    }
+    /*wallForty- twentieth column, first line*/
+    #wallFortyOne {
+      position: absolute;
+      width: 2;
+      height:322;
+      left: 830;
+      top: 180;
+      background-color: black;
+    }
+    /*wallFortyOne- twentieth column, second line*/
+    #wallFortyTwo {
+      position: absolute;
+      width: 2;
+      height:400;
+      left: 850;
+      top: 100;
+      background-color: black;
+    }
+    /*wallFortyTwo- twenty-first column*/
+    #wallFortyThree {
+      position: absolute;
+      width: 380;
+      height:2;
+      left: 470;
+      top: 100;
+      background-color: black;
+    }
+    /*wallFortyThree- first row*/
+    #wallFortyFour {
+      position: absolute;
+      width: 80;
+      height:2;
+      left: 470;
+      top: 120;
+      background-color: black;
+    }
+    /*wallFortyFour- second row, first line*/
+    #wallFortyFive {
+      position: absolute;
+      width: 140;
+      height:2;
+      left: 570;
+      top: 120;
+      background-color: black;
+    }
+    /*wallFortyFive- second row, second line*/
+    #wallFortySix {
+      position: absolute;
+      width: 100;
+      height:2;
+      left: 730;
+      top: 120;
+      background-color: black;
+    }
+    /*wallFortySix- second row, third line*/
+    #wallFortySeven {
+      position: absolute;
+      width: 320;
+      height:2;
+      left: 490;
+      top: 140;
+      background-color: black;
+    }
+    /*wallFortySeven- third row*/
+    #wallFortyEight {
+      position: absolute;
+      width: 280;
+      height:2;
+      left: 510;
+      top: 160;
+      background-color: black;
+    }
+    /*wallFortyThree- fourth row, first line*/
+    #wallFortyNine {
+      position: absolute;
+      width: 40;
+      height:2;
+      left: 810;
+      top: 160;
+      background-color: black;
+    }
+    /*wallFortyNine- fourth row, second line*/
+    #wallFifty {
+      position: absolute;
+      width: 140;
+      height:2;
+      left: 530;
+      top: 180;
+      background-color: black;
+    }
+    /*wallFifty- fifth row, first line*/
+    #wallFiftyOne {
+      position: absolute;
+      width: 80;
+      height:2;
+      left: 690;
+      top: 180;
+      background-color: black;
+    }
+    /*wallFiftyOne- fifth row, second line*/
+    #wallFiftyTwo {
+      position: absolute;
+      width: 100;
+      height:2;
+      left: 550;
+      top: 200;
+      background-color: black;
+    }
+    /*wallFiftyTwo- sixth row, first line*/
+    #wallFiftyThree {
+      position: absolute;
+      width: 20;
+      height:2;
+      left: 730;
+      top: 200;
+      background-color: black;
+    }
+    /*wallFiftyThree- sixth row, second line*/
+    #wallFiftyFour {
+      position: absolute;
+      width: 60;
+      height:2;
+      left: 570;
+      top: 220;
+      background-color: black;
+    }
+    /*wallFiftyFour- seventh row, first line*/
+    #wallFiftyFive {
+      position: absolute;
+      width: 20;
+      height:2;
+      left: 670;
+      top: 220;
+      background-color: black;
+    }
+    /*wallFiftyFive- seventh row, second line*/
+    #wallFiftySix {
+      position: absolute;
+      width: 40;
+      height:2;
+      left: 570;
+      top: 240;
+      background-color: black;
+    }
+    /*wallFiftySix- eighth row*/
+    #wallFiftySeven {
+      position: absolute;
+      width: 60;
+      height:2;
+      left: 590;
+      top: 260;
+      background-color: black;
+    }
+    /*wallFiftySeven- ninth row, line one*/
+    #wallFiftyEight {
+      position: absolute;
+      width: 20;
+      height:2;
+      left: 710;
+      top: 260;
+      background-color: black;
+    }
+    /*wallFiftyEight- ninth row, line two*/
+    #wallFiftyNine {
+      position: absolute;
+      width: 40;
+      height:2;
+      left: 770;
+      top: 260;
+      background-color: black;
+    }
+    /*wallFiftyNine- ninth row, line 3*/
+    #wallSixty {
+      position: absolute;
+      width: 60;
+      height:2;
+      left: 610;
+      top: 280;
+      background-color: black;
+    }
+    /*wallSixty- tenth row, line 1*/
+    #wallSixtyOne {
+      position: absolute;
+      width: 20;
+      height:2;
+      left: 690;
+      top: 280;
+      background-color: black;
+    }
+    /*wallSixtyOne- tenth row, line 2*/
+    #wallSixtyTwo {
+      position: absolute;
+      width: 40;
+      height:2;
+      left: 730;
+      top: 280;
+      background-color: black;
+    }
+    /*wallSixtyTwo- tenth row, line 3*/
+    #wallSixtyThree {
+      position: absolute;
+      width: 100;
+      height:2;
+      left: 630;
+      top: 300;
+      background-color: black;
+    }
+    /*wallSixtyThree- 11th row, line 1*/
+    #wallSixtyFour {
+      position: absolute;
+      width: 40;
+      height:2;
+      left: 750;
+      top: 300;
+      background-color: black;
+    }
+    /*wallSixtyFour- 11th row, line 2*/
+    #wallSixtyFive {
+      position: absolute;
+      width: 20;
+      height:2;
+      left: 650;
+      top: 320;
+      background-color: black;
+    }
+    /*wallSixtyFive- 12th row, line 1*/
+    #wallSixtySix {
+      position: absolute;
+      width: 80;
+      height:2;
+      left: 690;
+      top: 320;
+      background-color: black;
+    }
+    /*wallSixtySix- 12th row, line 2*/
+    #wallSixtySeven {
+      position: absolute;
+      width: 20;
+      height:2;
+      left: 590;
+      top: 340;
+      background-color: black;
+    }
+    /*wallSixtySeven- 13th row, line 1*/
+    #wallSixtyEight {
+      position: absolute;
+      width: 60;
+      height:2;
+      left: 670;
+      top: 340;
+      background-color: black;
+    }
+    /*wallSixtyEight- 13th row, line 2*/
+    #wallSixtyNine {
+      position: absolute;
+      width: 60;
+      height:2;
+      left: 670;
+      top: 360;
+      background-color: black;
+    }
+    /*wallSixtyNine- 14th row*/
+    #wallSeventy {
+      position: absolute;
+      width: 20;
+      height:2;
+      left: 630;
+      top: 380;
+      background-color: black;
+    }
+    /*wallSeventy- 15th row, line 1*/
+    #wallSeventyOne {
+      position: absolute;
+      width: 40;
+      height:2;
+      left: 670;
+      top: 380;
+      background-color: black;
+    }
+    /*wallSeventyOne- 15th row, line 2*/
+    #wallSeventyTwo {
+      position: absolute;
+      width: 40;
+      height:2;
+      left: 550;
+      top: 400;
+      background-color: black;
+    }
+    /*wallSeventyTwo- 16th row, line 1*/
+    #wallSeventyThree {
+      position: absolute;
+      width: 120;
+      height:2;
+      left: 650;
+      top: 400;
+      background-color: black;
+    }
+    /*wallSeventyThree- 16th row, line 2*/
+    #wallSeventyFour {
+      position: absolute;
+      width: 100;
+      height:2;
+      left:510;
+      top: 420;
+      background-color: black;
+    }
+    /*wallSeventyFour- 17th row, line 1*/
+    #wallSeventyFive {
+      position: absolute;
+      width: 40;
+      height:2;
+      left: 630;
+      top: 420;
+      background-color: black;
+    }
+    /*wallSeventyFive- 17th row, line 2*/
+    #wallSeventySix {
+      position: absolute;
+      width: 100;
+      height:2;
+      left: 690;
+      top: 420;
+      background-color: black;
+    }
+    /*wallSeventySix- 17th row, line 3*/
+    #wallSeventySeven {
+      position: absolute;
+      width: 300;
+      height:2;
+      left: 490;
+      top: 440;
+      background-color: black;
+    }
+    /*wallSeventySeven- 18th row*/
+    #wallSeventyEight {
+      position: absolute;
+      width: 160;
+      height:2;
+      left: 490;
+      top: 460;
+      background-color: black;
+    }
+    /*wallSeventyEight- 19th row, line 1*/
+    #wallSeventyNine {
+      position: absolute;
+      width: 140;
+      height:2;
+      left: 670;
+      top: 460;
+      background-color: black;
+    }
+    /*wallSeventyNine- 19th row, line 2*/
+    #wallEighty {
+      position: absolute;
+      width: 160;
+      height:2;
+      left: 450;
+      top: 480;
+      background-color: black;
+    }
+    /*wallEighty- 20th row, line 1*/
+    #wallEightyOne {
+      position: absolute;
+      width: 200;
+      height:2;
+      left: 630;
+      top: 480;
+      background-color: black;
+    }
+    /*wallEightyOne- 20th row, line 2*/
+    #wallEightyTwo {
+      position: absolute;
+      width: 380;
+      height:2;
+      left: 450;
+      top: 500;
+      background-color: black;
+    }
+    /*wallEightyTwo- 21st row*/
+
+  </style>
+</head>
+<title>Level 2</title>
+<body>
+
+  <!---->
+  <audio style="opacity: 0.0; float: left;  width: 20px; height: 10px;" controls autoplay loop>
+    <source src="https://dl20.y2mate.com/youtube/mp3/2/y2mate.com%20-%20auracle_music_stand_and_fight_nEgKXtA8SZY.mp3" type="audio/mpeg">
+  </audio>
+
+  <center>
+  <!--Where the maze is generated.-->
+    <div class="transbox">
+      <div id="box"></div>
+      <div id="wallOne"></div>
+      <div id="wallTwo"></div>
+      <div id="wallThree"></div>
+      <div id="wallFour"></div>
+      <div id="wallFive"></div>
+      <div id="wallSix"></div>
+      <div id="wallSeven"></div>
+      <div id="wallEight"></div>
+      <div id="wallNine"></div>
+      <div id="wallTen"></div>
+      <div id="wallEleven"></div>
+      <div id="wallTwelve"></div>
+      <div id="wallThirteen"></div>
+      <div id="wallFourteen"></div>
+      <div id="wallFifteen"></div>
+      <div id="wallSixteen"></div>
+      <div id="wallSeventeen"></div>
+      <div id="wallEighteen"></div>
+      <div id="wallNineteen"></div>
+      <div id="wallTwenty"></div>
+      <div id="wallTwentyOne"></div>
+      <div id="wallTwentyTwo"></div>
+      <div id="wallTwentyThree"></div>
+      <div id="wallTwentyFour"></div>
+      <div id="wallTwentyFive"></div>
+      <div id="wallTwentySix"></div>
+      <div id="wallTwentySeven"></div>
+      <div id="wallTwentyEight"></div>
+      <div id="wallTwentyNine"></div>
+      <div id="wallThirty"></div>
+      <div id="wallThirtyOne"></div>
+      <div id="wallThirtyTwo"></div>
+      <div id="wallThirtyThree"></div>
+      <div id="wallThirtyFour"></div>
+      <div id="wallThirtyFive"></div>
+      <div id="wallThirtySix"></div>
+      <div id="wallThirtySeven"></div>
+      <div id="wallThirtyEight"></div>
+      <div id="wallThirtyNine"></div>
+      <div id="wallForty"></div>
+      <div id="wallFortyOne"></div>
+      <div id="wallFortyTwo"></div>
+      <div id="wallFortyThree"></div>
+      <div id="wallFortyFour"></div>
+      <div id="wallFortyFive"></div>
+      <div id="wallFortySix"></div>
+      <div id="wallFortySeven"></div>
+      <div id="wallFortyEight"></div>
+      <div id="wallFortyNine"></div>
+      <div id="wallFifty"></div>
+      <div id="wallFiftyOne"></div>
+      <div id="wallFiftyTwo"></div>
+      <div id="wallFiftyThree"></div>
+      <div id="wallFiftyFour"></div>
+      <div id="wallFiftyFive"></div>
+      <div id="wallFiftySix"></div>
+      <div id="wallFiftySeven"></div>
+      <div id="wallFiftyEight"></div>
+      <div id="wallFiftyNine"></div>
+      <div id="wallSixty"></div>
+      <div id="wallSixtyOne"></div>
+      <div id="wallSixtyTwo"></div>
+      <div id="wallSixtyThree"></div>
+      <div id="wallSixtyFour"></div>
+      <div id="wallSixtyFive"></div>
+      <div id="wallSixtySix"></div>
+      <div id="wallSixtySeven"></div>
+      <div id="wallSixtyEight"></div>
+      <div id="wallSixtyNine"></div>
+      <div id="wallSeventy"></div>
+      <div id="wallSeventyOne"></div>
+      <div id="wallSeventyTwo"></div>
+      <div id="wallSeventyThree"></div>
+      <div id="wallSeventyFour"></div>
+      <div id="wallSeventyFive"></div>
+      <div id="wallSeventySix"></div>
+      <div id="wallSeventySeven"></div>
+      <div id="wallSeventyEight"></div>
+      <div id="wallSeventyNine"></div>
+      <div id="wallEighty"></div>
+      <div id="wallEightyOne"></div>
+      <div id="wallEightyTwo"></div>
+      <form action="/Win" method="get">
+        <div class="wall" ></div>
+      </form>
+    </div>
+  </center>
+
+<script>
+
+  let boxHeight = 10;
+  let boxWidth = 10;
+  let boxTop = 105;
+  let boxLeft = 455;
+
+  let wallOneHeight = 400;
+  let wallOneWidth = 2;
+  let wallOneTop = 100;
+  let wallOneLeft = 450;
+
+  let wallTwoHeight = 360;
+  let wallTwoWidth = 2;
+  let wallTwoTop = 120;
+  let wallTwoLeft = 470;
+
+  let wallThreeHeight = 160;
+  let wallThreeWidth = 2;
+  let wallThreeTop = 140;
+  let wallThreeLeft = 490;
+
+  let wallFourHeight = 140;
+  let wallFourWidth = 2;
+  let wallFourTop = 320;
+  let wallFourLeft = 490;
+
+  let wallFiveHeight = 20;
+  let wallFiveWidth = 2;
+  let wallFiveTop = 160;
+  let wallFiveLeft = 510;
+
+  let wallSixHeight = 20;
+  let wallSixWidth = 2;
+  let wallSixTop = 200;
+  let wallSixLeft = 510;
+
+  let wallSevenHeight = 140;
+  let wallSevenWidth = 2;
+  let wallSevenTop = 180;
+  let wallSevenLeft = 530;
+
+  let wallEightHeight = 100;
+  let wallEightWidth = 2;
+  let wallEightTop = 340;
+  let wallEightLeft = 530;
+
+  let wallNineHeight = 40;
+  let wallNineWidth = 2;
+  let wallNineTop = 200;
+  let wallNineLeft = 550;
+
+  let wallTenHeight = 140;
+  let wallTenWidth = 2;
+  let wallTenTop = 260;
+  let wallTenLeft = 550;
+
+  let wallElevenHeight = 80;
+  let wallElevenWidth = 2;
+  let wallElevenTop = 220;
+  let wallElevenLeft = 570;
+
+  let wallTwelveHeight = 60;
+  let wallTwelveWidth = 2;
+  let wallTwelveTop = 320;
+  let wallTwelveLeft = 570;
+
+  let wallThirteenHeight = 80;
+  let wallThirteenWidth = 2;
+  let wallThirteenTop = 260;
+  let wallThirteenLeft = 590;
+
+  let wallFourteenHeight = 40;
+  let wallFourteenWidth = 2;
+  let wallFourteenTop = 360;
+  let wallFourteenLeft = 590;
+
+  let wallFifteenHeight = 120;
+  let wallFifteenWidth = 2;
+  let wallFifteenTop = 280;
+  let wallFifteenLeft = 610;
+
+  let wallSixteenHeight = 40;
+  let wallSixteenWidth = 2;
+  let wallSixteenTop = 200;
+  let wallSixteenLeft = 630;
+
+  let wallSeventeenHeight = 120;
+  let wallSeventeenWidth = 2;
+  let wallSeventeenTop = 300;
+  let wallSeventeenLeft = 630;
+
+  let wallEighteenHeight = 20;
+  let wallEighteenWidth = 2;
+  let wallEighteenTop = 180;
+  let wallEighteenLeft = 650;
+
+  let wallNineteenHeight = 40;
+  let wallNineteenWidth = 2;
+  let wallNineteenTop = 220;
+  let wallNineteenLeft = 650;
+
+  let wallTwentyHeight = 60;
+  let wallTwentyWidth = 2;
+  let wallTwentyTop = 320;
+  let wallTwentyLeft = 650;
+
+  let wallTwentyOneHeight = 20;
+  let wallTwentyOneWidth = 2;
+  let wallTwentyOneTop = 460;
+  let wallTwentyOneLeft = 650;
+
+  let wallTwentyTwoHeight = 40;
+  let wallTwentyTwoWidth = 2;
+  let wallTwentyTwoTop = 180;
+  let wallTwentyTwoLeft = 670;
+
+  let wallTwentyThreeHeight = 60;
+  let wallTwentyThreeWidth = 2;
+  let wallTwentyThreeTop = 240;
+  let wallTwentyThreeLeft = 670;
+
+  let wallTwentyFourHeight = 20;
+  let wallTwentyFourWidth = 2;
+  let wallTwentyFourTop = 340;
+  let wallTwentyFourLeft = 670;
+
+  let wallTwentyFiveHeight = 20;
+  let wallTwentyFiveWidth = 2;
+  let wallTwentyFiveTop = 420;
+  let wallTwentyFiveLeft = 670;
+
+  let wallTwentySixHeight = 60;
+  let wallTwentySixWidth = 2;
+  let wallTwentySixTop = 180;
+  let wallTwentySixLeft = 690;
+
+  let wallTwentySevenHeight = 40;
+  let wallTwentySevenWidth = 2;
+  let wallTwentySevenTop = 260;
+  let wallTwentySevenLeft = 690;
+
+  let wallTwentyEightHeight = 20;
+  let wallTwentyEightWidth = 2;
+  let wallTwentyEightTop = 100;
+  let wallTwentyEightLeft = 710;
+
+  let wallTwentyNineHeight = 80;
+  let wallTwentyNineWidth = 2;
+  let wallTwentyNineTop = 200;
+  let wallTwentyNineLeft = 710;
+
+  let wallThirtyHeight = 20;
+  let wallThirtyWidth = 2;
+  let wallThirtyTop = 380;
+  let wallThirtyLeft = 710;
+
+  let wallThirtyOneHeight = 60;
+  let wallThirtyOneWidth = 2;
+  let wallThirtyOneTop = 180;
+  let wallThirtyOneLeft = 730;
+
+  let wallThirtyTwoHeight = 20;
+  let wallThirtyTwoWidth = 2;
+  let wallThirtyTwoTop = 360;
+  let wallThirtyTwoLeft = 730;
+
+  let wallThirtyThreeHeight = 60;
+  let wallThirtyThreeWidth = 2;
+  let wallThirtyThreeTop = 200;
+  let wallThirtyThreeLeft = 750;
+
+  let wallThirtyFourHeight = 60;
+  let wallThirtyFourWidth = 2;
+  let wallThirtyFourTop = 340;
+  let wallThirtyFourLeft = 750;
+
+  let wallThirtyFiveHeight = 100;
+  let wallThirtyFiveWidth = 2;
+  let wallThirtyFiveTop = 180;
+  let wallThirtyFiveLeft = 770;
+
+  let wallThirtySixHeight = 100;
+  let wallThirtySixWidth = 2;
+  let wallThirtySixTop = 300;
+  let wallThirtySixLeft = 770;
+
+  let wallThirtySevenHeight = 220;
+  let wallThirtySevenWidth = 2;
+  let wallThirtySevenTop = 160;
+  let wallThirtySevenLeft = 790;
+
+  let wallThirtyEightHeight = 40;
+  let wallThirtyEightWidth = 2;
+  let wallThirtyEightTop = 400;
+  let wallThirtyEightLeft = 790;
+
+  let wallThirtyNineHeight = 320;
+  let wallThirtyNineWidth = 2;
+  let wallThirtyNineTop = 140;
+  let wallThirtyNineLeft = 810;
+
+  let wallFortyHeight = 40;
+  let wallFortyWidth = 2;
+  let wallFortyTop = 120;
+  let wallFortyLeft = 830;
+
+  let wallFortyOneHeight = 320;
+  let wallFortyOneWidth = 2;
+  let wallFortyOneTop = 180;
+  let wallFortyOneLeft = 830;
+
+  let wallFortyTwoHeight = 400;
+  let wallFortyTwoWidth = 2;
+  let wallFortyTwoTop = 100;
+  let wallFortyTwoLeft = 850;
+
+  let wallFortyThreeHeight = 2;
+  let wallFortyThreeWidth = 380;
+  let wallFortyThreeTop = 100;
+  let wallFortyThreeLeft = 470;
+
+  let wallFortyFourHeight = 2;
+  let wallFortyFourWidth = 80;
+  let wallFortyFourTop = 120;
+  let wallFortyFourLeft = 470;
+
+  let wallFortyFiveHeight = 2;
+  let wallFortyFiveWidth = 140;
+  let wallFortyFiveTop = 120;
+  let wallFortyFiveLeft = 570;
+
+  let wallFortySixHeight = 2;
+  let wallFortySixWidth = 100;
+  let wallFortySixTop = 120;
+  let wallFortySixLeft = 730;
+
+  let wallFortySevenHeight = 2;
+  let wallFortySevenWidth = 320;
+  let wallFortySevenTop = 140;
+  let wallFortySevenLeft = 490;
+
+  let wallFortyEightHeight = 2;
+  let wallFortyEightWidth = 280;
+  let wallFortyEightTop = 160;
+  let wallFortyEightLeft = 510;
+
+  let wallFortyNineHeight = 2;
+  let wallFortyNineWidth = 140;
+  let wallFortyNineTop = 180;
+  let wallFortyNineLeft = 530;
+
+  let wallFiftyHeight = 2;
+  let wallFiftyWidth = 80;
+  let wallFiftyTop = 180;
+  let wallFiftyLeft = 690;
+
+  let wallFiftyOneHeight = 2;
+  let wallFiftyOneWidth = 100;
+  let wallFiftyOneTop = 200;
+  let wallFiftyOneLeft = 550;
+
+  let wallFiftyTwoHeight = 2;
+  let wallFiftyTwoWidth = 20;
+  let wallFiftyTwoTop = 200;
+  let wallFiftyTwoLeft = 730;
+
+  let wallFiftyThreeHeight = 2;
+  let wallFiftyThreeWidth = 60;
+  let wallFiftyThreeTop = 220;
+  let wallFiftyThreeLeft = 570;
+
+  let wallFiftyFourHeight = 2;
+  let wallFiftyFourWidth = 20;
+  let wallFiftyFourTop = 220;
+  let wallFiftyFourLeft = 670;
+
+  let wallFiftyFiveHeight = 2;
+  let wallFiftyFiveWidth = 40;
+  let wallFiftyFiveTop = 240;
+  let wallFiftyFiveLeft = 570;
+
+  let wallFiftySixHeight = 2;
+  let wallFiftySixWidth = 60;
+  let wallFiftySixTop = 260;
+  let wallFiftySixLeft = 590;
+
+  let wallFiftySevenHeight = 2;
+  let wallFiftySevenWidth = 20;
+  let wallFiftySevenTop = 260;
+  let wallFiftySevenLeft = 710;
+
+  let wallFiftyEightHeight = 2;
+  let wallFiftyEightWidth = 40;
+  let wallFiftyEightTop = 260;
+  let wallFiftyEightLeft = 770;
+
+  let wallFiftyNineHeight = 2;
+  let wallFiftyNineWidth = 60;
+  let wallFiftyNineTop = 280;
+  let wallFiftyNineLeft = 610;
+
+  let wallSixtyHeight = 2;
+  let wallSixtyWidth = 20;
+  let wallSixtyTop = 280;
+  let wallSixtyLeft = 690;
+
+  let wallSixtyOneHeight = 2;
+  let wallSixtyOneWidth = 40;
+  let wallSixtyOneTop = 280;
+  let wallSixtyOneLeft = 730;
+
+  let wallSixtyTwoHeight = 2;
+  let wallSixtyTwoWidth = 100;
+  let wallSixtyTwoTop = 300;
+  let wallSixtyTwoLeft = 630;
+
+  let wallSixtyThreeHeight = 2;
+  let wallSixtyThreeWidth = 40;
+  let wallSixtyThreeTop = 300;
+  let wallSixtyThreeLeft = 750;
+
+  let wallSixtyFourHeight = 2;
+  let wallSixtyFourWidth = 20;
+  let wallSixtyFourTop = 320;
+  let wallSixtyFourLeft = 650;
+
+  let wallSixtyFiveHeight = 2;
+  let wallSixtyFiveWidth = 80;
+  let wallSixtyFiveTop = 320;
+  let wallSixtyFiveLeft = 690;
+
+  let wallSixtySixHeight = 2;
+  let wallSixtySixWidth = 20;
+  let wallSixtySixTop = 340;
+  let wallSixtySixLeft = 590;
+
+  let wallSixtySevenHeight = 2;
+  let wallSixtySevenWidth = 60;
+  let wallSixtySevenTop = 340;
+  let wallSixtySevenLeft = 670;
+
+  let wallSixtyEightHeight = 2;
+  let wallSixtyEightWidth = 60;
+  let wallSixtyEightTop = 360;
+  let wallSixtyEightLeft = 670;
+
+  let wallSixtyNineHeight = 2;
+  let wallSixtyNineWidth = 20;
+  let wallSixtyNineTop = 380;
+  let wallSixtyNineLeft = 630;
+
+  let wallSeventyHeight = 2;
+  let wallSeventyWidth = 40;
+  let wallSeventyTop = 380;
+  let wallSeventyLeft = 670;
+
+  let wallSeventyOneHeight = 2;
+  let wallSeventyOneWidth = 40;
+  let wallSeventyOneTop = 400;
+  let wallSeventyOneLeft = 550;
+
+  let wallSeventyTwoHeight = 2;
+  let wallSeventyTwoWidth = 120;
+  let wallSeventyTwoTop = 400;
+  let wallSeventyTwoLeft = 650;
+
+  let wallSeventyThreeHeight = 2;
+  let wallSeventyThreeWidth = 100;
+  let wallSeventyThreeTop = 420;
+  let wallSeventyThreeLeft = 510;
+
+  let wallSeventyFourHeight = 2;
+  let wallSeventyFourWidth = 40;
+  let wallSeventyFourTop = 420;
+  let wallSeventyFourLeft = 630;
+
+  let wallSeventyFiveHeight = 2;
+  let wallSeventyFiveWidth = 100;
+  let wallSeventyFiveTop = 420;
+  let wallSeventyFiveLeft = 690;
+
+  let wallSeventySixHeight = 2;
+  let wallSeventySixWidth = 300;
+  let wallSeventySixTop = 440;
+  let wallSeventySixLeft = 490;
+
+  let wallSeventySevenHeight = 2;
+  let wallSeventySevenWidth = 160;
+  let wallSeventySevenTop = 460;
+  let wallSeventySevenLeft = 490;
+
+  let wallSeventyEightHeight = 2;
+  let wallSeventyEightWidth = 140;
+  let wallSeventyEightTop = 460;
+  let wallSeventyEightLeft = 670;
+
+  let wallSeventyNineHeight = 2;
+  let wallSeventyNineWidth = 160;
+  let wallSeventyNineTop = 480;
+  let wallSeventyNineLeft = 450;
+
+  let wallEightyHeight = 2;
+  let wallEightyWidth = 100;
+  let wallEightyTop = 480;
+  let wallEightyLeft = 630;
+
+  let wallEightyOneHeight = 2;
+  let wallEightyOneWidth = 380;
+  let wallEightyOneTop = 500;
+  let wallEightyOneLeft = 450;
+
+  function Collision(a) {
+    console.log(a.style.top, a.style.left);
+    if (((boxTop <= (wallOneTop + wallOneHeight)) && ((boxTop + boxHeight) >= wallOneTop) && ((boxLeft + boxWidth) >= wallOneLeft) && (boxLeft <= (wallOneLeft + wallOneWidth))) ||
+        ((boxTop <= (wallTwoTop + wallTwoHeight)) && ((boxTop + boxHeight) >= wallTwoTop) && ((boxLeft + boxWidth) >= wallTwoLeft) && (boxLeft <= (wallTwoLeft + wallTwoWidth))) ||
+        ((boxTop <= (wallThreeTop + wallThreeHeight)) && ((boxTop + boxHeight) >= wallThreeTop) && ((boxLeft + boxWidth) >= wallThreeLeft) && (boxLeft <= (wallThreeLeft + wallThreeWidth))) ||
+        ((boxTop <= (wallFourTop + wallFourHeight)) && ((boxTop + boxHeight) >= wallFourTop) && ((boxLeft + boxWidth) >= wallFourLeft) && (boxLeft <= (wallFourLeft + wallFourWidth))) ||
+        ((boxTop <= (wallFiveTop + wallFiveHeight)) && ((boxTop + boxHeight) >= wallFiveTop) && ((boxLeft + boxWidth) >= wallFiveLeft) && (boxLeft <= (wallFiveLeft + wallFiveWidth))) ||
+        ((boxTop <= (wallSixTop + wallSixHeight)) && ((boxTop + boxHeight) >= wallSixTop) && ((boxLeft + boxWidth) >= wallSixLeft) && (boxLeft <= (wallSixLeft + wallSixWidth))) ||
+        ((boxTop <= (wallSixTop + wallSixHeight)) && ((boxTop + boxHeight) >= wallSixTop) && ((boxLeft + boxWidth) >= wallSixLeft) && (boxLeft <= (wallSixLeft + wallSixWidth))) ||
+        ((boxTop <= (wallSevenTop + wallSevenHeight)) && ((boxTop + boxHeight) >= wallSevenTop) && ((boxLeft + boxWidth) >= wallSevenLeft) && (boxLeft <= (wallSevenLeft + wallSevenWidth))) ||
+        ((boxTop <= (wallEightTop + wallEightHeight)) && ((boxTop + boxHeight) >= wallEightTop) && ((boxLeft + boxWidth) >= wallEightLeft) && (boxLeft <= (wallEightLeft + wallEightWidth))) ||
+        ((boxTop <= (wallNineTop + wallNineHeight)) && ((boxTop + boxHeight) >= wallNineTop) && ((boxLeft + boxWidth) >= wallNineLeft) && (boxLeft <= (wallNineLeft + wallNineWidth))) ||
+        ((boxTop <= (wallTenTop + wallTenHeight)) && ((boxTop + boxHeight) >= wallTenTop) && ((boxLeft + boxWidth) >= wallTenLeft) && (boxLeft <= (wallTenLeft + wallTenWidth))) ||
+        ((boxTop <= (wallElevenTop + wallElevenHeight)) && ((boxTop + boxHeight) >= wallElevenTop) && ((boxLeft + boxWidth) >= wallElevenLeft) && (boxLeft <= (wallElevenLeft + wallElevenWidth))) ||
+        ((boxTop <= (wallTwelveTop + wallTwelveHeight)) && ((boxTop + boxHeight) >= wallTwelveTop) && ((boxLeft + boxWidth) >= wallTwelveLeft) && (boxLeft <= (wallTwelveLeft + wallTwelveWidth))) ||
+        ((boxTop <= (wallThirteenTop + wallThirteenHeight)) && ((boxTop + boxHeight) >= wallThirteenTop) && ((boxLeft + boxWidth) >= wallThirteenLeft) && (boxLeft <= (wallThirteenLeft + wallThirteenWidth))) ||
+        ((boxTop <= (wallFourteenTop + wallFourteenHeight)) && ((boxTop + boxHeight) >= wallFourteenTop) && ((boxLeft + boxWidth) >= wallFourteenLeft) && (boxLeft <= (wallFourteenLeft + wallFourteenWidth))) ||
+        ((boxTop <= (wallFifteenTop + wallFifteenHeight)) && ((boxTop + boxHeight) >= wallFifteenTop) && ((boxLeft + boxWidth) >= wallFifteenLeft) && (boxLeft <= (wallFifteenLeft + wallFifteenWidth))) ||
+        ((boxTop <= (wallSixteenTop + wallSixteenHeight)) && ((boxTop + boxHeight) >= wallSixteenTop) && ((boxLeft + boxWidth) >= wallSixteenLeft) && (boxLeft <= (wallSixteenLeft + wallSixteenWidth))) ||
+        ((boxTop <= (wallSeventeenTop + wallSeventeenHeight)) && ((boxTop + boxHeight) >= wallSeventeenTop) && ((boxLeft + boxWidth) >= wallSeventeenLeft) && (boxLeft <= (wallSeventeenLeft + wallSeventeenWidth))) ||
+        ((boxTop <= (wallEighteenTop + wallEighteenHeight)) && ((boxTop + boxHeight) >= wallEighteenTop) && ((boxLeft + boxWidth) >= wallEighteenLeft) && (boxLeft <= (wallEighteenLeft + wallEighteenWidth))) ||
+        ((boxTop <= (wallNineteenTop + wallNineteenHeight)) && ((boxTop + boxHeight) >= wallNineteenTop) && ((boxLeft + boxWidth) >= wallNineteenLeft) && (boxLeft <= (wallNineteenLeft + wallNineteenWidth))) ||
+        ((boxTop <= (wallTwentyTop + wallTwentyHeight)) && ((boxTop + boxHeight) >= wallTwentyTop) && ((boxLeft + boxWidth) >= wallTwentyLeft) && (boxLeft <= (wallTwentyLeft + wallTwentyWidth))) ||
+        ((boxTop <= (wallTwentyOneTop + wallTwentyOneHeight)) && ((boxTop + boxHeight) >= wallTwentyOneTop) && ((boxLeft + boxWidth) >= wallTwentyOneLeft) && (boxLeft <= (wallTwentyOneLeft + wallTwentyOneWidth))) ||
+        ((boxTop <= (wallTwentyTwoTop + wallTwentyTwoHeight)) && ((boxTop + boxHeight) >= wallTwentyTwoTop) && ((boxLeft + boxWidth) >= wallTwentyTwoLeft) && (boxLeft <= (wallTwentyTwoLeft + wallTwentyTwoWidth))) ||
+        ((boxTop <= (wallTwentyThreeTop + wallTwentyThreeHeight)) && ((boxTop + boxHeight) >= wallTwentyThreeTop) && ((boxLeft + boxWidth) >= wallTwentyThreeLeft) && (boxLeft <= (wallTwentyThreeLeft + wallTwentyThreeWidth))) ||
+        ((boxTop <= (wallTwentyFourTop + wallTwentyFourHeight)) && ((boxTop + boxHeight) >= wallTwentyFourTop) && ((boxLeft + boxWidth) >= wallTwentyFourLeft) && (boxLeft <= (wallTwentyFourLeft + wallTwentyFourWidth))) ||
+        ((boxTop <= (wallTwentyFiveTop + wallTwentyFiveHeight)) && ((boxTop + boxHeight) >= wallTwentyFiveTop) && ((boxLeft + boxWidth) >= wallTwentyFiveLeft) && (boxLeft <= (wallTwentyFiveLeft + wallTwentyFiveWidth))) ||
+        ((boxTop <= (wallTwentySixTop + wallTwentySixHeight)) && ((boxTop + boxHeight) >= wallTwentySixTop) && ((boxLeft + boxWidth) >= wallTwentySixLeft) && (boxLeft <= (wallTwentySixLeft + wallTwentySixWidth))) ||
+        ((boxTop <= (wallTwentySevenTop + wallTwentySevenHeight)) && ((boxTop + boxHeight) >= wallTwentySevenTop) && ((boxLeft + boxWidth) >= wallTwentySevenLeft) && (boxLeft <= (wallTwentySevenLeft + wallTwentySevenWidth))) ||
+        ((boxTop <= (wallTwentyEightTop + wallTwentyEightHeight)) && ((boxTop + boxHeight) >= wallTwentyEightTop) && ((boxLeft + boxWidth) >= wallTwentyEightLeft) && (boxLeft <= (wallTwentyEightLeft + wallTwentyEightWidth))) ||
+        ((boxTop <= (wallTwentyNineTop + wallTwentyNineHeight)) && ((boxTop + boxHeight) >= wallTwentyNineTop) && ((boxLeft + boxWidth) >= wallTwentyNineLeft) && (boxLeft <= (wallTwentyNineLeft + wallTwentyNineWidth))) ||
+        ((boxTop <= (wallThirtyTop + wallThirtyHeight)) && ((boxTop + boxHeight) >= wallThirtyTop) && ((boxLeft + boxWidth) >= wallThirtyLeft) && (boxLeft <= (wallThirtyLeft + wallThirtyWidth))) ||
+        ((boxTop <= (wallThirtyOneTop + wallThirtyOneHeight)) && ((boxTop + boxHeight) >= wallThirtyOneTop) && ((boxLeft + boxWidth) >= wallThirtyOneLeft) && (boxLeft <= (wallThirtyOneLeft + wallThirtyOneWidth))) ||
+        ((boxTop <= (wallThirtyTwoTop + wallThirtyTwoHeight)) && ((boxTop + boxHeight) >= wallThirtyTwoTop) && ((boxLeft + boxWidth) >= wallThirtyTwoLeft) && (boxLeft <= (wallThirtyTwoLeft + wallThirtyTwoWidth))) ||
+        ((boxTop <= (wallThirtyThreeTop + wallThirtyThreeHeight)) && ((boxTop + boxHeight) >= wallThirtyThreeTop) && ((boxLeft + boxWidth) >= wallThirtyThreeLeft) && (boxLeft <= (wallThirtyThreeLeft + wallThirtyThreeWidth))) ||
+        ((boxTop <= (wallThirtyFourTop + wallThirtyFourHeight)) && ((boxTop + boxHeight) >= wallThirtyFourTop) && ((boxLeft + boxWidth) >= wallThirtyFourLeft) && (boxLeft <= (wallThirtyFourLeft + wallThirtyFourWidth))) ||
+        ((boxTop <= (wallThirtyFiveTop + wallThirtyFiveHeight)) && ((boxTop + boxHeight) >= wallThirtyFiveTop) && ((boxLeft + boxWidth) >= wallThirtyFiveLeft) && (boxLeft <= (wallThirtyFiveLeft + wallThirtyFiveWidth))) ||
+        ((boxTop <= (wallThirtySixTop + wallThirtySixHeight)) && ((boxTop + boxHeight) >= wallThirtySixTop) && ((boxLeft + boxWidth) >= wallThirtySixLeft) && (boxLeft <= (wallThirtySixLeft + wallThirtySixWidth))) ||
+        ((boxTop <= (wallThirtySevenTop + wallThirtySevenHeight)) && ((boxTop + boxHeight) >= wallThirtySevenTop) && ((boxLeft + boxWidth) >= wallThirtySevenLeft) && (boxLeft <= (wallThirtySevenLeft + wallThirtySevenWidth))) ||
+        ((boxTop <= (wallThirtyEightTop + wallThirtyEightHeight)) && ((boxTop + boxHeight) >= wallThirtyEightTop) && ((boxLeft + boxWidth) >= wallThirtyEightLeft) && (boxLeft <= (wallThirtyEightLeft + wallThirtyEightWidth))) ||
+        ((boxTop <= (wallThirtyNineTop + wallThirtyNineHeight)) && ((boxTop + boxHeight) >= wallThirtyNineTop) && ((boxLeft + boxWidth) >= wallThirtyNineLeft) && (boxLeft <= (wallThirtyNineLeft + wallThirtyNineWidth))) ||
+        ((boxTop <= (wallFortyTop + wallFortyHeight)) && ((boxTop + boxHeight) >= wallFortyTop) && ((boxLeft + boxWidth) >= wallFortyLeft) && (boxLeft <= (wallFortyLeft + wallFortyWidth))) ||
+        ((boxTop <= (wallFortyOneTop + wallFortyOneHeight)) && ((boxTop + boxHeight) >= wallFortyOneTop) && ((boxLeft + boxWidth) >= wallFortyOneLeft) && (boxLeft <= (wallFortyOneLeft + wallFortyOneWidth))) ||
+        ((boxTop <= (wallFortyTwoTop + wallFortyTwoHeight)) && ((boxTop + boxHeight) >= wallFortyTwoTop) && ((boxLeft + boxWidth) >= wallFortyTwoLeft) && (boxLeft <= (wallFortyTwoLeft + wallFortyTwoWidth))) ||
+        ((boxTop <= (wallFortyThreeTop + wallFortyThreeHeight)) && ((boxTop + boxHeight) >= wallFortyThreeTop) && ((boxLeft + boxWidth) >= wallFortyThreeLeft) && (boxLeft <= (wallFortyThreeLeft + wallFortyThreeWidth))) ||
+        ((boxTop <= (wallFortyFourTop + wallFortyFourHeight)) && ((boxTop + boxHeight) >= wallFortyFourTop) && ((boxLeft + boxWidth) >= wallFortyFourLeft) && (boxLeft <= (wallFortyFourLeft + wallFortyFourWidth))) ||
+        ((boxTop <= (wallFortyFiveTop + wallFortyFiveHeight)) && ((boxTop + boxHeight) >= wallFortyFiveTop) && ((boxLeft + boxWidth) >= wallFortyFiveLeft) && (boxLeft <= (wallFortyFiveLeft + wallFortyFiveWidth))) ||
+        ((boxTop <= (wallFortySixTop + wallFortySixHeight)) && ((boxTop + boxHeight) >= wallFortySixTop) && ((boxLeft + boxWidth) >= wallFortySixLeft) && (boxLeft <= (wallFortySixLeft + wallFortySixWidth))) ||
+        ((boxTop <= (wallFortySevenTop + wallFortySevenHeight)) && ((boxTop + boxHeight) >= wallFortySevenTop) && ((boxLeft + boxWidth) >= wallFortySevenLeft) && (boxLeft <= (wallFortySevenLeft + wallFortySevenWidth))) ||
+        ((boxTop <= (wallFortyEightTop + wallFortyEightHeight)) && ((boxTop + boxHeight) >= wallFortyEightTop) && ((boxLeft + boxWidth) >= wallFortyEightLeft) && (boxLeft <= (wallFortyEightLeft + wallFortyEightWidth))) ||
+        ((boxTop <= (wallFortyNineTop + wallFortyNineHeight)) && ((boxTop + boxHeight) >= wallFortyNineTop) && ((boxLeft + boxWidth) >= wallFortyNineLeft) && (boxLeft <= (wallFortyNineLeft + wallFortyNineWidth))) ||
+        ((boxTop <= (wallFiftyTop + wallFiftyHeight)) && ((boxTop + boxHeight) >= wallFiftyTop) && ((boxLeft + boxWidth) >= wallFiftyLeft) && (boxLeft <= (wallFiftyLeft + wallFiftyWidth))) ||
+        ((boxTop <= (wallFiftyOneTop + wallFiftyOneHeight)) && ((boxTop + boxHeight) >= wallFiftyOneTop) && ((boxLeft + boxWidth) >= wallFiftyOneLeft) && (boxLeft <= (wallFiftyOneLeft + wallFiftyOneWidth))) ||
+        ((boxTop <= (wallFiftyTwoTop + wallFiftyTwoHeight)) && ((boxTop + boxHeight) >= wallFiftyTwoTop) && ((boxLeft + boxWidth) >= wallFiftyTwoLeft) && (boxLeft <= (wallFiftyTwoLeft + wallFiftyTwoWidth))) ||
+        ((boxTop <= (wallFiftyThreeTop + wallFiftyThreeHeight)) && ((boxTop + boxHeight) >= wallFiftyThreeTop) && ((boxLeft + boxWidth) >= wallFiftyThreeLeft) && (boxLeft <= (wallFiftyThreeLeft + wallFiftyThreeWidth))) ||
+        ((boxTop <= (wallFiftyFourTop + wallFiftyFourHeight)) && ((boxTop + boxHeight) >= wallFiftyFourTop) && ((boxLeft + boxWidth) >= wallFiftyFourLeft) && (boxLeft <= (wallFiftyFourLeft + wallFiftyFourWidth))) ||
+        ((boxTop <= (wallFiftyFiveTop + wallFiftyFiveHeight)) && ((boxTop + boxHeight) >= wallFiftyFiveTop) && ((boxLeft + boxWidth) >= wallFiftyFiveLeft) && (boxLeft <= (wallFiftyFiveLeft + wallFiftyFiveWidth))) ||
+        ((boxTop <= (wallFiftySixTop + wallFiftySixHeight)) && ((boxTop + boxHeight) >= wallFiftySixTop) && ((boxLeft + boxWidth) >= wallFiftySixLeft) && (boxLeft <= (wallFiftySixLeft + wallFiftySixWidth))) ||
+        ((boxTop <= (wallFiftySevenTop + wallFiftySevenHeight)) && ((boxTop + boxHeight) >= wallFiftySevenTop) && ((boxLeft + boxWidth) >= wallFiftySevenLeft) && (boxLeft <= (wallFiftySevenLeft + wallFiftySevenWidth))) ||
+        ((boxTop <= (wallFiftyEightTop + wallFiftyEightHeight)) && ((boxTop + boxHeight) >= wallFiftyEightTop) && ((boxLeft + boxWidth) >= wallFiftyEightLeft) && (boxLeft <= (wallFiftyEightLeft + wallFiftyEightWidth))) ||
+        ((boxTop <= (wallFiftyNineTop + wallFiftyNineHeight)) && ((boxTop + boxHeight) >= wallFiftyNineTop) && ((boxLeft + boxWidth) >= wallFiftyNineLeft) && (boxLeft <= (wallFiftyNineLeft + wallFiftyNineWidth))) ||
+        ((boxTop <= (wallSixtyTop + wallSixtyHeight)) && ((boxTop + boxHeight) >= wallSixtyTop) && ((boxLeft + boxWidth) >= wallSixtyLeft) && (boxLeft <= (wallSixtyLeft + wallSixtyWidth))) ||
+        ((boxTop <= (wallSixtyOneTop + wallSixtyOneHeight)) && ((boxTop + boxHeight) >= wallSixtyOneTop) && ((boxLeft + boxWidth) >= wallSixtyOneLeft) && (boxLeft <= (wallSixtyOneLeft + wallSixtyOneWidth))) ||
+        ((boxTop <= (wallSixtyTwoTop + wallSixtyTwoHeight)) && ((boxTop + boxHeight) >= wallSixtyTwoTop) && ((boxLeft + boxWidth) >= wallSixtyTwoLeft) && (boxLeft <= (wallSixtyTwoLeft + wallSixtyTwoWidth))) ||
+        ((boxTop <= (wallSixtyThreeTop + wallSixtyThreeHeight)) && ((boxTop + boxHeight) >= wallSixtyThreeTop) && ((boxLeft + boxWidth) >= wallSixtyThreeLeft) && (boxLeft <= (wallSixtyThreeLeft + wallSixtyThreeWidth))) ||
+        ((boxTop <= (wallSixtyFourTop + wallSixtyFourHeight)) && ((boxTop + boxHeight) >= wallSixtyFourTop) && ((boxLeft + boxWidth) >= wallSixtyFourLeft) && (boxLeft <= (wallSixtyFourLeft + wallSixtyFourWidth))) ||
+        ((boxTop <= (wallSixtyFiveTop + wallSixtyFiveHeight)) && ((boxTop + boxHeight) >= wallSixtyFiveTop) && ((boxLeft + boxWidth) >= wallSixtyFiveLeft) && (boxLeft <= (wallSixtyFiveLeft + wallSixtyFiveWidth))) ||
+        ((boxTop <= (wallSixtySixTop + wallSixtySixHeight)) && ((boxTop + boxHeight) >= wallSixtySixTop) && ((boxLeft + boxWidth) >= wallSixtySixLeft) && (boxLeft <= (wallSixtySixLeft + wallSixtySixWidth))) ||
+        ((boxTop <= (wallSixtySevenTop + wallSixtySevenHeight)) && ((boxTop + boxHeight) >= wallSixtySevenTop) && ((boxLeft + boxWidth) >= wallSixtySevenLeft) && (boxLeft <= (wallSixtySevenLeft + wallSixtySevenWidth))) ||
+        ((boxTop <= (wallSixtyEightTop + wallSixtyEightHeight)) && ((boxTop + boxHeight) >= wallSixtyEightTop) && ((boxLeft + boxWidth) >= wallSixtyEightLeft) && (boxLeft <= (wallSixtyEightLeft + wallSixtyEightWidth))) ||
+        ((boxTop <= (wallSixtyNineTop + wallSixtyNineHeight)) && ((boxTop + boxHeight) >= wallSixtyNineTop) && ((boxLeft + boxWidth) >= wallSixtyNineLeft) && (boxLeft <= (wallSixtyNineLeft + wallSixtyNineWidth))) ||
+        ((boxTop <= (wallSeventyTop + wallSeventyHeight)) && ((boxTop + boxHeight) >= wallSeventyTop) && ((boxLeft + boxWidth) >= wallSeventyLeft) && (boxLeft <= (wallSeventyLeft + wallSeventyWidth))) ||
+        ((boxTop <= (wallSeventyOneTop + wallSeventyOneHeight)) && ((boxTop + boxHeight) >= wallSeventyOneTop) && ((boxLeft + boxWidth) >= wallSeventyOneLeft) && (boxLeft <= (wallSeventyOneLeft + wallSeventyOneWidth))) ||
+        ((boxTop <= (wallSeventyTwoTop + wallSeventyTwoHeight)) && ((boxTop + boxHeight) >= wallSeventyTwoTop) && ((boxLeft + boxWidth) >= wallSeventyTwoLeft) && (boxLeft <= (wallSeventyTwoLeft + wallSeventyTwoWidth))) ||
+        ((boxTop <= (wallSeventyThreeTop + wallSeventyThreeHeight)) && ((boxTop + boxHeight) >= wallSeventyThreeTop) && ((boxLeft + boxWidth) >= wallSeventyThreeLeft) && (boxLeft <= (wallSeventyThreeLeft + wallSeventyThreeWidth))) ||
+        ((boxTop <= (wallSeventyFourTop + wallSeventyFourHeight)) && ((boxTop + boxHeight) >= wallSeventyFourTop) && ((boxLeft + boxWidth) >= wallSeventyFourLeft) && (boxLeft <= (wallSeventyFourLeft + wallSeventyFourWidth))) ||
+        ((boxTop <= (wallSeventyFiveTop + wallSeventyFiveHeight)) && ((boxTop + boxHeight) >= wallSeventyFiveTop) && ((boxLeft + boxWidth) >= wallSeventyFiveLeft) && (boxLeft <= (wallSeventyFiveLeft + wallSeventyFiveWidth))) ||
+        ((boxTop <= (wallSeventySixTop + wallSeventySixHeight)) && ((boxTop + boxHeight) >= wallSeventySixTop) && ((boxLeft + boxWidth) >= wallSeventySixLeft) && (boxLeft <= (wallSeventySixLeft + wallSeventySixWidth))) ||
+        ((boxTop <= (wallSeventySevenTop + wallSeventySevenHeight)) && ((boxTop + boxHeight) >= wallSeventySevenTop) && ((boxLeft + boxWidth) >= wallSeventySevenLeft) && (boxLeft <= (wallSeventySevenLeft + wallSeventySevenWidth))) ||
+        ((boxTop <= (wallSeventyEightTop + wallSeventyEightHeight)) && ((boxTop + boxHeight) >= wallSeventyEightTop) && ((boxLeft + boxWidth) >= wallSeventyEightLeft) && (boxLeft <= (wallSeventyEightLeft + wallSeventyEightWidth))) ||
+        ((boxTop <= (wallSeventyNineTop + wallSeventyNineHeight)) && ((boxTop + boxHeight) >= wallSeventyNineTop) && ((boxLeft + boxWidth) >= wallSeventyNineLeft) && (boxLeft <= (wallSeventyNineLeft + wallSeventyNineWidth))) ||
+        ((boxTop <= (wallEightyTop + wallEightyHeight)) && ((boxTop + boxHeight) >= wallEightyTop) && ((boxLeft + boxWidth) >= wallEightyLeft) && (boxLeft <= (wallEightyLeft + wallEightyWidth))) ||
+        ((boxTop <= (wallEightyOneTop + wallEightyOneHeight)) && ((boxTop + boxHeight) >= wallEightyOneTop) && ((boxLeft + boxWidth) >= wallEightyOneLeft) && (boxLeft <= (wallEightyOneLeft + wallEightyOneWidth)))
+      ){
+        console.log("Stop!!");
+        location.reload();
+    }
+  }
+
+  function goal(shiftLeft,shiftTop) {
+    if ( shiftLeft == ( 835 || 835 + 5 || 835 - 5) && shiftTop == ( 480 || 480 + 5 || 880 - 5) ) {
+        window.location.href = "/maze_win.html";
+    }
+  }
+
+  let shiftLeft = 455;
+  let shiftTop = 105;
+
+  document.addEventListener('keydown', (event)=> {
+      if( shiftLeft>450 && shiftLeft<850 && shiftTop>100 && shiftTop<500 )
+      {
+        if(event.key === 'ArrowDown')
+        {
+          shiftTop = shiftTop + 5;
+          Collision(box);
+          goal(shiftLeft,shiftTop);
+        }
+        else if(event.key === 'ArrowLeft')
+        {
+          shiftLeft = shiftLeft - 5;
+          Collision(box);
+          goal(shiftLeft,shiftTop);
+        }
+        else if (event.key === 'ArrowUp')
+        {
+          shiftTop = shiftTop - 5;
+          Collision(box);
+          goal(shiftLeft,shiftTop);
+        }
+        else if(event.key === 'ArrowRight')
+        {
+          shiftLeft = shiftLeft + 5;
+          Collision(box);
+          goal(shiftLeft,shiftTop);
+        }
+        box.style.left = shiftLeft + 'px';
+        box.style.top = shiftTop + 'px';
+        boxTop = shiftTop;
+        boxLeft = shiftLeft;
+      }
+      else {
+        location.reload();
+      }
+  });
+</script>
+</body>
+</html>
